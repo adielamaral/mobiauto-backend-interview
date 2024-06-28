@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: mobiauto-backend
+
+  data:
+    mongodb:
+      uri: mongodb+srv://admin:root@mobiauto-db.hai7adv.mongodb.net/mobiauto-db?retryWrites=true&w=majority&appName=mobiauto-db
+
+VERSION:
+  api:
+    latest: 1.0.0
+
+mobiauto:
+  secret: passwordpasswordpasswordpasswordpasswordpasswordpasswordpasswordpassword
+  access-token-validity: 86400000
+  name-super-admin-mobiauto: Super Admin Mobiauto
+  master-email: super.admin@mobiauto.com
+  master-password: mobiautoSuperAdminPassword
+
+logging:
+  level:
+    root: INFO
+    org.springframework: INFO
+    src.main.java.com.mobiautorevenda: DEBUG
