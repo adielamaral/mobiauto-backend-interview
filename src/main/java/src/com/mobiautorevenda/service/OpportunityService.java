@@ -97,7 +97,7 @@ public class OpportunityService {
         }
 
         if (userWithFewestServices == null) {
-            throw new NotFoundException("No user with Profile.USER found to assign the service");
+            throw new NotFoundException("No user with USER found to assign the service");
         }
 
         return userWithFewestServices;
@@ -122,7 +122,15 @@ public class OpportunityService {
         opportunity.setStatus(updateOpportunityRequest.getStatus());
         opportunity.setClientData(updateOpportunityRequest.getClientData());
         opportunity.setCarDetails(updateOpportunityRequest.getCarDetails());
-        opportunity.setReasonForConclusion(updateOpportunityRequest.getReasonForConclusion());
+
+        if (updateOpportunityRequest.getStatus() == OpportunityStatus.COMPLETED) {
+            opportunity.setCompletionDate(LocalDateTime.now());
+            opportunity.setReasonForConclusion(updateOpportunityRequest.getReasonForConclusion());
+            final var qtdServices = user.getQtdServicesInProgress();
+            final var reduceQtdServices = qtdServices - 1;
+            user.setQtdServicesInProgress(reduceQtdServices);
+            userAccountRepository.save(user);
+        }
 
         if (user.getProfile() == Profile.OWNER || user.getProfile() == Profile.MANAGER || user.getProfile() == Profile.ADMINISTRATOR) {
             opportunity.setUserResponsible(updateOpportunityRequest.getUserResponsible());
