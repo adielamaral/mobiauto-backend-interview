@@ -35,7 +35,7 @@ public class LoginService {
 
     public UserLoginResponse login(LoginRequest loginRequest) {
         final var user = userAccountService.findByEmail(formatAndValidateEmail(loginRequest.getEmail()));
-        final var passwordLoginEncrypted = new DigestUtils(SHA_3_256).digestAsHex(loginRequest.getPassword());
+        final var passwordLoginEncrypted = loginRequest.getPassword() != null ? new DigestUtils(SHA_3_256).digestAsHex(loginRequest.getPassword()) : null;
         String userPassword = user.getPassword();
 
         if (Objects.equals(user.getEmail(), loginRequest.getEmail()) && Objects.isNull(userPassword)) {
@@ -101,7 +101,7 @@ public class LoginService {
     }
 
     private void validatePasswordCode(SetPasswordRequest setPasswordRequest) {
-        PasswordCodeData passwordCodeData = passwordCodeDataRepository.findByEmail(setPasswordRequest.getEmail());
+        PasswordCodeData passwordCodeData = passwordCodeDataRepository.findByCode(setPasswordRequest.getCode());
         if (passwordCodeData == null || !passwordCodeData.isValid() || !Objects.equals(setPasswordRequest.getCode(), passwordCodeData.getCode())) {
             throw new InvalidCodeException("No valid password code found for the given email or invalid code");
         }

@@ -1,11 +1,11 @@
 package src.com.mobiautorevenda.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import src.com.mobiautorevenda.dto.user.UserResponsibleDto;
 import src.com.mobiautorevenda.enums.OpportunityStatus;
 
 import java.time.LocalDateTime;
@@ -16,8 +16,7 @@ import java.time.LocalDateTime;
 public class Opportunity {
     @Id
     private String id;
-    @JsonIgnore
-    private UserAccount userResponsible;
+    private UserResponsibleDto userResponsible;
     @NotNull(message = "Status is required")
     private OpportunityStatus status;
     @NotNull(message = "ClientData is required")
@@ -25,4 +24,6 @@ public class Opportunity {
     private CarDetails carDetails;
     private LocalDateTime attributionData;
     private LocalDateTime completionDate;
+    private String reasonForConclusion;
+    private Resale resale;
 }

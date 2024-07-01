@@ -5,8 +5,8 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public class NonMatchingPasswordsException extends RuntimeException {
-    public NonMatchingPasswordsException(String message) {
+public class UnauthorizedException extends RuntimeException {
+    public UnauthorizedException(String message) {
         super(message);
     }
 

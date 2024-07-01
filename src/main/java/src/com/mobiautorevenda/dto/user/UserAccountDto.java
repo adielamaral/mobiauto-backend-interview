@@ -14,6 +14,5 @@ public class UserAccountDto {
     @JsonIgnore
     private String password;
     private Resale resale;
-    private int qtdServicesInProgress;
     private Profile profile;
 }

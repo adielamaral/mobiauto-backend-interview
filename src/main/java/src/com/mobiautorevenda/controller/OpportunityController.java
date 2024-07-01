@@ -7,8 +7,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import src.com.mobiautorevenda.dto.opportunity.request.OpportunityRegistrationRequest;
+import src.com.mobiautorevenda.dto.opportunity.request.UpdateOpportunityRequest;
 import src.com.mobiautorevenda.dto.opportunity.request.UpdateStatusOpportunityRequest;
 import src.com.mobiautorevenda.service.OpportunityService;
+
+import java.security.Principal;
 
 @RestController
 @RequiredArgsConstructor
@@ -25,10 +28,19 @@ public class OpportunityController {
         opportunityService.createNewOpportunity(dataOpportunityRequest);
     }
 
+    @Operation(summary = "Opportunity edit")
+    @PutMapping("/{opportunityId}")
+    public void update(@PathVariable String opportunityId,
+                       @RequestBody UpdateOpportunityRequest updateOpportunityRequest,
+                       Principal loggedInUser) {
+        opportunityService.update(opportunityId, updateOpportunityRequest, loggedInUser);
+    }
+
     @Operation(summary = "Service status update")
-    @PutMapping
-    public void updateStatus(@RequestBody @Valid UpdateStatusOpportunityRequest updateStatusOpportunityRequest) {
-        opportunityService.serviceStatusUpdate(updateStatusOpportunityRequest);
+    @PutMapping("/{opportunityId}/update-status")
+    public void updateStatus(@PathVariable String opportunityId,
+                             @RequestBody @Valid UpdateStatusOpportunityRequest updateStatusOpportunityRequest) {
+        opportunityService.serviceStatusUpdate(opportunityId, updateStatusOpportunityRequest);
     }
 
 }

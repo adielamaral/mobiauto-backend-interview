@@ -13,9 +13,11 @@ VERSION:
 mobiauto:
   secret: passwordpasswordpasswordpasswordpasswordpasswordpasswordpasswordpassword
   access-token-validity: 86400000
-  name-super-admin-mobiauto: Super Admin Mobiauto
-  master-email: super.admin@mobiauto.com
-  master-password: mobiautoSuperAdminPassword
+  name-admin: Admin Mobiauto
+  master-email: admin@mobiauto.com
+  master-password: mobiautoAdminPassword
+  cnpj-resale: 12.345.678/0001-95
+  corporate-reason-resale: Mobiauto
 
 logging:
   level:

@@ -11,6 +11,7 @@ import src.com.mobiautorevenda.dto.user.request.CreateUserAccountRequest;
 import src.com.mobiautorevenda.dto.user.response.UserAccountDataResponse;
 import src.com.mobiautorevenda.service.UserAccountService;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -24,8 +25,8 @@ public class UserAccountController {
     @Operation(summary = "Create a new user")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public void create(@RequestBody @Valid CreateUserAccountRequest dataUserAccountRequest) {
-        userAccountService.createNewUserAccount(dataUserAccountRequest);
+    public void create(@RequestBody @Valid CreateUserAccountRequest dataUserAccountRequest, Principal loggedInUser) {
+        userAccountService.createNewUserAccount(dataUserAccountRequest, loggedInUser);
     }
 
     @Operation(summary = "List all registered users and their associated data")

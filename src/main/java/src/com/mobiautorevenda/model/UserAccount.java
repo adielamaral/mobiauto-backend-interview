@@ -1,5 +1,6 @@
 package src.com.mobiautorevenda.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -16,6 +17,7 @@ public class UserAccount {
     private String name;
     @Indexed(unique = true)
     private String email;
+    @JsonIgnore
     private String password;
     private Resale resale;
     private int qtdServicesInProgress;
