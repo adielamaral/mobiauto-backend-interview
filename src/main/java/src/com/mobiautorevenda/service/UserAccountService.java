@@ -103,6 +103,7 @@ public class UserAccountService {
                     .name(dataUserAccountRequest.getName())
                     .email(dataUserAccountRequest.getEmail())
                     .resale(Resale.builder()
+                            .id(user.getResale().getId())
                             .cnpj(user.getResale().getCnpj())
                             .corporateReason(user.getResale().getCorporateReason())
                             .build())
